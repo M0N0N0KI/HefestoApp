@@ -27,6 +27,5 @@ public class Loginctrl {
     {
         return "Esta Funcional";
     }
-
     
 }
