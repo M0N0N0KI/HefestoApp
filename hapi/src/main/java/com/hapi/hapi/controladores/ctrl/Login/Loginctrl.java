@@ -22,5 +22,11 @@ public class Loginctrl {
     {
         return usuariorepo.findAll();
     }
+    @GetMapping("teste")
+    public String TesteApi()
+    {
+        return "Esta Funcional";
+    }
+
     
 }
