@@ -11,5 +11,6 @@ public class Usuariodto {
     private String nome;
     private String identificador;
     private String senha;
+    private String status;
     
 }
