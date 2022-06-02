@@ -1,5 +1,7 @@
 package com.hapi.hapi.controladores.services.Usuario;
 
+import java.util.Optional;
+
 import com.hapi.hapi.controladores.dto.Usuariodto.CUsuariodto;
 import com.hapi.hapi.controladores.dto.Usuariodto.SUsuariodto;
 import com.hapi.hapi.controladores.services.Contato.ContatoService;
@@ -39,9 +41,27 @@ public class UsuarioService {
         return userv;
     }
 
+    
+
     public SUsuariodto RecuperarUsuarioSimplesPorIdentificador(String identificador)
     {
-        return null;
+        final Optional<Usuario> entidade = repo.buscarPorIdentificador(identificador);
+        if(entidade.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            SUsuariodto usuario = new SUsuariodto();
+            usuario.setId(entidade.get().getId());
+            usuario.setNome(entidade.get().getNome());
+            usuario.setIdentificador(entidade.get().getIdentificador());
+            usuario.setSenha(entidade.get().getSenha());
+            usuario.setStatus(entidade.get().getStatus());
+            usuario.setContato(entidade.get().getEndereco().getId());
+            usuario.setEndereco(entidade.get().getEndereco().getId());
+            return usuario;
+        }
     }
     
 }
