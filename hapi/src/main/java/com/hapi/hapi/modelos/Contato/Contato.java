@@ -26,10 +26,13 @@ public class Contato implements Serializable{
     @Column(name = "contato_id")
     private Long id;
 
+    @Column(name ="contato_email", length = 120)
+    private String email;
+
     @Column(name = "contato_telefone", length = 12)
     private String telefone;
 
-    @Column(name ="contato_email", length = 120)
-    private String email;
+    @Column(name ="contato_celular", length = 120)
+    private String celular;
     
 }

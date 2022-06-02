@@ -9,7 +9,8 @@ import lombok.Setter;
 public class Contatodto {
 
     private Long id;
-    private String telefone;
     private String email;
+    private String telefone;
+    private String celular;
 
 }
