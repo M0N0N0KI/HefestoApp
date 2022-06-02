@@ -1,5 +1,7 @@
 package com.hapi.hapi.controladores.services.Contato;
 
+import java.util.Optional;
+
 import com.hapi.hapi.controladores.dto.Contatodto.Contatodto;
 import com.hapi.hapi.modelos.Contato.Contato;
 import com.hapi.hapi.modelos.Contato.RepoContato;
@@ -21,5 +23,22 @@ public class ContatoService {
         entidade.setCelular(contato.getCelular());
         return repo.save(entidade);
     }
-    
+
+    public Contatodto RecuperarContatoPorId(Long id)
+    {
+        final Optional<Contato> entidade = repo.findById(id);
+        if(entidade.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            Contatodto contato = new Contatodto();
+            contato.setId(entidade.get().getId());
+            contato.setEmail(entidade.get().getEmail());
+            contato.setTelefone(entidade.get().getTelefone());
+            contato.setCelular(entidade.get().getCelular());
+            return contato;
+        }
+    }
 }

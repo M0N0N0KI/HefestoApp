@@ -38,5 +38,10 @@ public class UsuarioService {
         userv.setEndereco(aux.getEndereco().getId());
         return userv;
     }
+
+    public SUsuariodto RecuperarUsuarioSimplesPorIdentificador(String identificador)
+    {
+        return null;
+    }
     
 }

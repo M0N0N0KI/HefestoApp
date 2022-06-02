@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RepoContato extends JpaRepository<Contato, Long> {
-
+    
 }
