@@ -18,7 +18,7 @@ public interface RepoExperiencia extends JpaRepository<Experiencia, Long>{
         Date fim
     );
     
-    @Query("select e from experiencia e where e.colaborador = ?1")
+    @Query("select e from Experiencia e where e.colaborador = ?1")
     public List<Experiencia> carregarExp(Long id);
 
 }
