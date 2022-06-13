@@ -1,15 +1,26 @@
 <template>
-  <hello-world />
+<div class="fundo">
+  <cadastro-h></cadastro-h>
+</div>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+  import CadastroH from '@/components/CadastroH.vue'
 
   export default {
     name: 'Home',
 
     components: {
-      HelloWorld,
+      CadastroH,
     },
   }
 </script>
+<style scoped lang="scss">
+.fundo
+{
+  width: 100%;
+  height: 100%;
+  background-image: url("@/assets/image/background.png");
+  background-size: cover;
+}
+</style>
