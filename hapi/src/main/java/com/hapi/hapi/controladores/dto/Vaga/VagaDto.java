@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class VagaDto {
     private Long id;
+    private Long empresa;
     private String cargaHoraria;
     private String status;
-    private Long empresa;
     private String preRequisitos;
     private String diferenciais;
     private String descricao;
