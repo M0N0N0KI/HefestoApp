@@ -42,7 +42,7 @@
                             <v-text-field
                                 v-model = "identificador"
                                 :rules = "regrasIdentificador"
-                                label = "CPF/CNPJ:"
+                                label = "CPF/CNPJ(Somente numeros):"
                             ></v-text-field>
                         </v-col>
                     </v-row>
@@ -121,13 +121,13 @@ export default
             {
                 if(this.passwordcheck())
                 {
-                    this.$refs.form.reset();
                     http.post('/login/cadastrar',{
-                        nome : this.nome,
-                        identificador : this.identificador,
-                        senha : this.senha,
-                        status : null
-                    }).then((response) =>(this.msg = response.data.results))
+                        'nome' : this.nome,
+                        'identificador' : this.identificador,
+                        'senha' : this.senha,
+                        'status' : null
+                    }).then((response) =>(this.msg = response.data));
+                    this.$refs.form.reset();
                 }
                 else
                 {
