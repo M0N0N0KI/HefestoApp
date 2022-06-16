@@ -12,7 +12,11 @@
             <div class="envelope">
             <h3 class="mensagem mr-3 ml-2 mt-4">Comece um novo futuro se cadastrando abaixo</h3>
             <p v-if="msg != ''" class="ml-5">{{ msg }}</p>
-            <h-form ref="form" v-model="valid" lazy-validation>
+            <v-form 
+                ref="form" 
+                v-model="valid" 
+                lazy-validation
+            >
                 <v-container>
                     <v-row>
                         <v-col>
@@ -68,19 +72,19 @@
                                 :disabled = "!valid"
                                 color="error"
                                 class = "ml-auto"
-                                @click = "cadastrar"
+                                @click = "validate"
                             >Cadastrar-se</v-btn>
                         </v-col>
                     </v-row>
                 </v-container>
-            </h-form>
+            </v-form>
             </div>
         </v-col>
     </v-row>
 </v-container>
 </template>
 <script>
-
+import { http } from "@/services/api-config";
 export default
 {
     name : 'CadastroH',
@@ -111,8 +115,30 @@ export default
         ]
     }),
     methods: {
-        cadastrar()
+        validate ()
         {
+            if(this.$refs.form.validate())
+            {
+                if(this.passwordcheck())
+                {
+                    this.$refs.form.reset();
+                    http.post('/login/cadastrar',{
+                        nome : this.nome,
+                        identificador : this.identificador,
+                        senha : this.senha,
+                        status : null
+                    }).then((response) =>(this.msg = response.data.results))
+                }
+                else
+                {
+                    this.msg = "As Senhas devem ser iguais";
+                }
+            }
+        },
+        
+        passwordcheck()
+        {
+            return (this.senha == this.senhaC)?true:false;
         },
     },
 }

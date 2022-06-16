@@ -11,8 +11,8 @@ public class ConfiguracaoCORS implements WebMvcConfigurer{
     public void addCorsMappings(CorsRegistry registro)
     {
         
-        registro.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
+        registro.addMapping("/*")
+                .allowedOrigins("*")
                 .allowedMethods("GET","POST","PUT","DELETE","OPTIONS","HEAD","TRACE","CONNECT");
 
     }
