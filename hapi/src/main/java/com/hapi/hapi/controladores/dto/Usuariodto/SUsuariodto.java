@@ -25,8 +25,11 @@ public class SUsuariodto extends Usuariodto{
         this.setIdentificador(user.getIdentificador());
         this.setSenha(user.getSenha());
         this.setStatus(user.getStatus());
-        this.setContato(user.getContato().getId());
-        this.setEndereco(user.getEndereco().getId());
+        if(user.getContato() != null) this.setContato(user.getContato().getId());
+        if(user.getContato() == null) this.setContato((long) 0);
+        if(user.getEndereco() != null) this.setEndereco(user.getEndereco().getId());
+        if(user.getEndereco() == null) this.setEndereco((long) 0);
     }
-    
+
+
 }

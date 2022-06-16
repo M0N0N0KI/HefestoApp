@@ -20,6 +20,9 @@ public interface RepoUsuario extends JpaRepository<Usuario, Long>{
     @Query("select u from Usuario u where u.identificador = ?1 and u.senha = ?2")
     public Optional<Usuario> validarPorIdentificador(String identificador, String senha);
 
+    @Query("select u from Usuario u where u.nome = ?1 and u.identificador = ?2")
+    public Optional<Usuario> validarNomeID(String nome, String identificador);
+
     @Query("select u from Usuario u where u.nome = ?1 and u.senha = ?2")
     public Optional<Usuario> validarPorNome(String identificador, String senha);
 }

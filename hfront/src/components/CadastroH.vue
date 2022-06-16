@@ -80,6 +80,7 @@
 </v-container>
 </template>
 <script>
+
 export default
 {
     name : 'CadastroH',
@@ -112,7 +113,6 @@ export default
     methods: {
         cadastrar()
         {
-            
         },
     },
 }
