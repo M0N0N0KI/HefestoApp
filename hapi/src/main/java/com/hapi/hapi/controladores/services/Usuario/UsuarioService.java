@@ -4,12 +4,16 @@ import java.util.Optional;
 
 import com.hapi.hapi.controladores.dto.Usuariodto.CUsuariodto;
 import com.hapi.hapi.controladores.dto.Usuariodto.SUsuariodto;
+import com.hapi.hapi.controladores.dto.Usuariodto.Uauthdto;
+import com.hapi.hapi.controladores.dto.Usuariodto.Usuariodto;
 import com.hapi.hapi.controladores.services.Contato.ContatoService;
 import com.hapi.hapi.controladores.services.Endereco.EnderecoService;
 import com.hapi.hapi.modelos.Usuario.RepoUsuario;
 import com.hapi.hapi.modelos.Usuario.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -41,7 +45,33 @@ public class UsuarioService {
         return userv;
     }
 
-    
+    public int CadastrarUsuario(Usuariodto usuario)
+    {
+        Optional<Usuario> conf  = repo.validarNomeID(usuario.getNome(), usuario.getIdentificador());
+        if(conf.isEmpty())
+        {
+            Usuario entidade = new Usuario();
+            entidade.setNome(usuario.getNome());
+            entidade.setIdentificador(usuario.getIdentificador());
+            entidade.setSenha(usuario.getSenha());
+            entidade.setStatus("Disponivel");
+            entidade.setContato(null);
+            entidade.setEndereco(null);
+            Usuario aux = repo.save(entidade);
+            if(aux != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
     public SUsuariodto RecuperarUsuarioSimplesPorIdentificador(String identificador)
     {
@@ -62,6 +92,24 @@ public class UsuarioService {
             usuario.setEndereco(entidade.get().getEndereco().getId());
             return usuario;
         }
+    }
+
+    public ResponseEntity validarUsuario(Uauthdto auth)
+    {
+        Optional<Usuario> user = repo.validarPorIdentificador(
+            auth.getUsuario(), 
+            auth.getSenha()
+        );
+        if(user.isEmpty())
+        {
+            user = repo.validarPorNome(
+                auth.getUsuario(), 
+                auth.getSenha()
+            );
+        }
+        return (user.isEmpty())
+            ?ResponseEntity.status(HttpStatus.BAD_REQUEST).body("combinação não encontrada")
+            :ResponseEntity.ok(new SUsuariodto(user.get()));
     }
     
 }

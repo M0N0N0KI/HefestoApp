@@ -40,6 +40,8 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter{
     {
 
         http
+            .cors()
+            .and()
             .authorizeRequests()
             .anyRequest()
             .authenticated()
