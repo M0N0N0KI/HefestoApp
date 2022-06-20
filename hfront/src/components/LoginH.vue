@@ -91,9 +91,13 @@ export default
                     localStorage.setItem('usuario',JSON.stringify(this.resposta.data))
                     this.criarSessao()
                 }
-                else
+                else if( this.resposta.status === 400)
                 {
                     this.msg = "usuario não encontrado"
+                }
+                else
+                {
+                    
                 }
             }
         },
