@@ -17,20 +17,22 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "colaborador")
-public class Colaborador implements Serializable
+public class Colaborador implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contato_id")
+    @Column(name = "colaborador_id")
     private Long id;
 
-    @Column(name ="contato_email", length = 120)
-    private String email;
+    @Column(name ="colaborador_github", length = 120)
+    private String github;
 
-    @Column(name = "contato_telefone", length = 12)
-    private String telefone;
+    @Column(name = "colaborador_behance", length = 50)
+    private String behance;
 
-    @Column(name ="contato_celular", length = 120)
-    private String celular;
+    @Column(name ="colaborador_linkedin", length = 120)
+    private String linkedin;
+
+}
