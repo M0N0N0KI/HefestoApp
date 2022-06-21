@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  
+  api:
+    build: ./hapi
+    container_name: hefesto-api
+    ports: 
+      - 8080:8080
+    networks:
+      - app-network
+  
+  front:
+    build: ./hfront
+    container_name: hefesto-front
+    ports:
+      - 4200:80
+    links:
+      - api
+    networks:
+      - app-network
+  
+networks:
+  app-network:
+    driver: bridge
+    
